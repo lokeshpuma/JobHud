@@ -35,7 +35,6 @@
 - [Roadmap](#-roadmap)
 - [License](#-license)
 - [Author](#-author)
-- [Acknowledgments](#-acknowledgments)
 - [Support](#-support)
 
 ---
@@ -137,156 +136,39 @@
 
 ### Prerequisites
 
-Before you begin, ensure you have the following installed:
+| Tool | Version | Link |
+|------|---------|------|
+| Flutter SDK | 3.0+ | [Install](https://flutter.dev/docs/get-started/install) |
+| Node.js | 16.x+ | [Install](https://nodejs.org/) |
+| MySQL | 8.0+ | [Install](https://dev.mysql.com/downloads/) |
+| Git | Latest | [Install](https://git-scm.com/downloads) |
 
-- **Flutter SDK** (3.0 or higher) - [Install Flutter](https://flutter.dev/docs/get-started/install)
-- **Node.js** (16.x or higher) - [Install Node.js](https://nodejs.org/)
-- **MySQL** (8.0 or higher) - [Install MySQL](https://dev.mysql.com/downloads/)
-- **Git** - [Install Git](https://git-scm.com/downloads)
-- A code editor (VS Code, Android Studio, or IntelliJ IDEA)
+### Installation
 
-### 📥 Installation
-
-#### 1️⃣ Clone the Repository
-
-```bash
-git clone https://github.com/your-username/your-repo.git
-cd your-repo
-```
-
-#### 2️⃣ Backend Setup
-
-```bash
-# Navigate to backend directory
-cd backend
-
-# Install dependencies
-npm install
-
-# Create environment file
-cp .env.example .env
-
-# Configure your .env file with these variables:
-# DB_HOST=localhost
-# DB_USER=root
-# DB_PASSWORD=yourpassword
-# DB_NAME=jobhud
-# JWT_SECRET=your_super_secret_jwt_key
-# PORT=5000
-
-# Create MySQL database
-mysql -u root -p
-CREATE DATABASE jobhud;
-USE jobhud;
-SOURCE schema.sql;  # If you have a schema file
-EXIT;
-
-# Start the server
-npm start
-```
-
-The backend server should now be running on `http://localhost:5000`
-
-#### 3️⃣ Frontend Setup
-
-```bash
-# Navigate to frontend directory (from project root)
-cd jobhud
-
-# Install Flutter dependencies
-flutter pub get
-
-# Update API endpoint in lib/services/api_service.dart
-# For Android Emulator:
-# final String baseUrl = "http://10.0.2.2:5000";
-# For iOS Simulator:
-# final String baseUrl = "http://localhost:5000";
-# For Web:
-# final String baseUrl = "http://localhost:5000";
-
-# Run the app
-flutter run
-
-# Or run on specific platform:
-flutter run -d chrome        # For web
-flutter run -d android       # For Android
-flutter run -d ios           # For iOS
-```
+1. **Clone**: `git clone https://github.com/your-username/your-repo.git && cd your-repo`
+2. **Backend**: `cd backend && npm install && cp .env.example .env && npm start`
+3. **Frontend**: `cd jobhud && flutter pub get && flutter run`
 
 ---
 
 ## 📁 Project Structure
 
-### Backend Architecture
-
-```
-backend/
-├── middleware/              # Custom middleware (auth, validation, etc.)
-│   └── authMiddleware.js
-├── routes/                  # API route definitions
-│   ├── auth.js             # Authentication routes
-│   ├── jobs.js             # Job-related routes
-│   ├── profile.js          # User profile routes
-│   └── tips.js             # Daily tips routes
-├── services/               # Business logic layer
-│   ├── authService.js      # Authentication service
-│   ├── jobService.js       # Job service
-│   └── userService.js      # User service
-├── models/                 # Database models
-│   ├── User.js
-│   ├── Job.js
-│   └── SavedJob.js
-├── config/                 # Configuration files
-│   └── database.js         # Database configuration
-├── utils/                  # Utility functions
-│   └── validators.js
-├── .env                    # Environment variables
-├── .gitignore
-├── server.js               # Main application entry point
-└── package.json            # Dependencies
-```
-
-### Frontend Architecture
-
-```
-jobhud/
-├── lib/
-│   ├── main.dart           # App entry point
-│   ├── models/             # Data models
-│   │   ├── user.dart
-│   │   ├── job.dart
-│   │   └── tip.dart
-│   ├── providers/          # State management
-│   │   ├── auth_provider.dart
-│   │   ├── job_provider.dart
-│   │   └── theme_provider.dart
-│   ├── screens/            # UI screens
-│   │   ├── auth/
-│   │   │   ├── login_screen.dart
-│   │   │   └── register_screen.dart
-│   │   ├── dashboard/
-│   │   │   ├── home_screen.dart
-│   │   │   ├── jobs_screen.dart
-│   │   │   └── saved_jobs_screen.dart
-│   │   └── profile/
-│   │       └── profile_screen.dart
-│   ├── services/           # API services
-│   │   ├── api_service.dart
-│   │   └── auth_service.dart
-│   ├── widgets/            # Reusable components
-│   │   ├── job_card.dart
-│   │   └── custom_button.dart
-│   └── utils/              # Utilities
-│       ├── constants.dart
-│       └── theme.dart
-├── android/                # Android platform files
-├── ios/                    # iOS platform files
-├── web/                    # Web platform files
-├── assets/                 # Images, fonts, etc.
-├── test/                   # Unit tests
-├── pubspec.yaml            # Flutter dependencies
-└── README.md
-```
+| Component | Folder | Description |
+|-----------|--------|-------------|
+| **Backend** | `backend/` | Node.js/Express server with MySQL |
+| | `middleware/` | Auth, validation middleware |
+| | `routes/` | API endpoints (auth, jobs, profile, tips) |
+| | `services/` | Business logic (auth, job, user services) |
+| | `models/` | Database models (User, Job, SavedJob) |
+| | `config/` | Database configuration |
+| | `utils/` | Validators and helpers |
+| **Frontend** | `jobhud/` | Flutter app |
+| | `lib/models/` | Data models (user, job, tip) |
+| | `lib/providers/` | State management (auth, job) |
+| | `lib/screens/` | UI screens (auth, dashboard, profile) |
+| | `lib/services/` | API services (auth, api) |
+| | `lib/widgets/` | Reusable components (job_card, filter_sheet) |
+| | `android/`, `ios/`, `web/` | Platform-specific files |
 
 ---
 
@@ -294,148 +176,41 @@ jobhud/
 
 ### Database Schema
 
-Create these tables in your MySQL database:
-
-```sql
-CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(255) UNIQUE NOT NULL,
-    email VARCHAR(255) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    full_name VARCHAR(255),
-    phone VARCHAR(20),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
-
-CREATE TABLE jobs (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    company VARCHAR(255) NOT NULL,
-    location VARCHAR(255),
-    description TEXT,
-    requirements TEXT,
-    salary_range VARCHAR(100),
-    job_type ENUM('Full-time', 'Part-time', 'Contract', 'Internship'),
-    posted_date DATE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE saved_jobs (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    job_id INT NOT NULL,
-    saved_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY (job_id) REFERENCES jobs(id) ON DELETE CASCADE,
-    UNIQUE KEY unique_save (user_id, job_id)
-);
-
-CREATE TABLE daily_tips (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    content TEXT NOT NULL,
-    category VARCHAR(100),
-    published_date DATE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-```
+Run the SQL in `backend/schema.sql` to create tables: users, jobs, saved_jobs, daily_tips.
 
 ### Environment Variables
 
-Create a `.env` file in the backend directory:
+Create `.env` in backend:
 
 ```env
-# Database Configuration
 DB_HOST=localhost
 DB_USER=root
-DB_PASSWORD=your_mysql_password
+DB_PASSWORD=yourpassword
 DB_NAME=jobhud
-DB_PORT=3306
-
-# Server Configuration
+JWT_SECRET=your_secret_key
 PORT=5000
-NODE_ENV=development
-
-# JWT Configuration
-JWT_SECRET=your_super_secret_jwt_key_change_this_in_production
-JWT_EXPIRE=7d
-
-# API Configuration
-API_VERSION=v1
 ```
 
 ---
 
 ## 🧪 Testing
 
-### Backend Tests
-
-```bash
-cd backend
-npm test
-```
-
-### Frontend Tests
-
-```bash
-cd jobhud
-flutter test
-```
-
-### API Testing with cURL
-
-```bash
-# Get daily tips
-curl http://localhost:5000/api/tips/daily
-
-# User login
-curl -X POST http://localhost:5000/api/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{"email":"user@example.com","password":"password123"}'
-
-# Get jobs (with auth token)
-curl http://localhost:5000/api/jobs \
-  -H "Authorization: Bearer YOUR_JWT_TOKEN"
-```
+| Component | Command | Description |
+|-----------|---------|-------------|
+| Backend | `cd backend && npm test` | Run backend tests |
+| Frontend | `cd jobhud && flutter test` | Run Flutter widget tests |
+| API | `curl http://localhost:5000/api/tips/daily` | Test API endpoints |
 
 ---
 
 ## 🚀 Deployment
 
-### Backend Deployment
-
-1. **Prepare for Production**:
-   - Set `NODE_ENV=production` in your environment variables
-   - Ensure all dependencies are installed: `npm install --production`
-   - Run database migrations if any
-
-2. **Deploy Options**:
-   - **Heroku**: Push to Heroku git, set environment variables
-   - **Vercel**: Use Vercel CLI or connect GitHub repo
-   - **AWS/DigitalOcean**: Use PM2 or Docker for containerization
-
-3. **Example with Heroku**:
-   ```bash
-   heroku create your-app-name
-   heroku config:set JWT_SECRET=your_secret_key
-   heroku config:set DB_HOST=your_db_host
-   git push heroku main
-   ```
-
-### Frontend Deployment
-
-1. **Build the App**:
-   ```bash
-   flutter build apk          # For Android
-   flutter build ios          # For iOS
-   flutter build web          # For Web
-   ```
-
-2. **Deploy**:
-   - **Android**: Upload APK to Google Play Store
-   - **iOS**: Upload to App Store Connect
-   - **Web**: Host on Firebase, Netlify, or Vercel
+| Component | Platform | Steps |
+|-----------|----------|-------|
+| Backend | Heroku/Vercel | Set env vars, push to git |
+| Frontend | Android | `flutter build apk` → Play Store |
+| | iOS | `flutter build ios` → App Store |
+| | Web | `flutter build web` → Firebase/Netlify |
 
 ---
 
@@ -455,80 +230,17 @@ curl http://localhost:5000/api/jobs \
 
 ---
 
-We love contributions! Here's how you can help make JobHud better:
+## 🤝 Contributing
 
-### Contributing Guidelines
+| Step | Action |
+|------|--------|
+| 1 | Fork & clone repo |
+| 2 | Create feature branch |
+| 3 | Make changes & test |
+| 4 | Commit with message (e.g., "Add: new feature") |
+| 5 | Push & open PR |
 
-1. **Fork the Repository**
-   ```bash
-   # Click the "Fork" button on GitHub
-   ```
-
-2. **Clone Your Fork**
-   ```bash
-   git clone https://github.com/YOUR-USERNAME/Raptor-JobSearcher.git
-   cd Raptor-JobSearcher
-   ```
-
-3. **Create a Feature Branch**
-   ```bash
-   git checkout -b feature/amazing-feature
-   ```
-
-4. **Make Your Changes**
-   - Write clean, readable code
-   - Follow existing code style
-   - Add comments where necessary
-   - Update documentation if needed
-
-5. **Test Your Changes**
-   ```bash
-   # Backend
-   cd backend && npm test
-   
-   # Frontend
-   cd jobhud && flutter test
-   ```
-
-6. **Commit Your Changes**
-   ```bash
-   git add .
-   git commit -m "Add: amazing new feature"
-   ```
-
-   **Commit Message Convention:**
-   - `Add:` for new features
-   - `Fix:` for bug fixes
-   - `Update:` for updates to existing features
-   - `Refactor:` for code refactoring
-   - `Docs:` for documentation changes
-
-7. **Push to Your Fork**
-   ```bash
-   git push origin feature/amazing-feature
-   ```
-
-8. **Open a Pull Request**
-   - Go to the original repository
-   - Click "New Pull Request"
-   - Select your feature branch
-   - Describe your changes in detail
-
-### 🐛 Bug Reports
-
-Found a bug? Please open an issue with:
-- Clear description of the problem
-- Steps to reproduce
-- Expected vs actual behavior
-- Screenshots (if applicable)
-- Your environment (OS, Flutter version, Node version)
-
-### 💡 Feature Requests
-
-Have an idea? We'd love to hear it! Open an issue with:
-- Clear description of the feature
-- Use cases and benefits
-- Any implementation ideas
+For bugs/features, open issues on GitHub.
 
 ---
 
@@ -564,21 +276,23 @@ Have an idea? We'd love to hear it! Open an issue with:
 
 ## 🗺️ Roadmap
 
-- [x] User authentication system
-- [x] Job browsing and search
-- [x] Save jobs functionality
-- [x] Daily tips feature
-- [x] Profile management
-- [ ] Advanced job filtering
-- [ ] AI-powered job recommendations
-- [ ] Resume builder
-- [ ] Application tracking system
-- [ ] Company reviews
-- [ ] Salary insights
-- [ ] Video interview preparation
-- [ ] Networking features
-- [ ] Mobile notifications
-- [ ] Dark mode support
+| Feature | Status |
+|---------|--------|
+| User authentication | ✅ |
+| Job browsing & search | ✅ |
+| Save jobs | ✅ |
+| Daily tips | ✅ |
+| Profile management | ✅ |
+| Advanced filtering | 🔄 |
+| AI recommendations | 🔄 |
+| Resume builder | 🔄 |
+| Application tracking | 🔄 |
+| Company reviews | 🔄 |
+| Salary insights | 🔄 |
+| Interview prep | 🔄 |
+| Networking | 🔄 |
+| Notifications | 🔄 |
+| Dark mode | 🔄 |
 
 ---
 
@@ -598,34 +312,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-## 🙏 Acknowledgments
+## � Support
 
-- Flutter team for the amazing framework
-- Express.js community for the robust backend framework
-- All contributors who help improve this project
-- Open source community for inspiration and resources
-
----
-
-## 📞 Support
-
-Need help? Here's how to get support:
-
-- 📧 **Email**: Open an issue on GitHub
-- 💬 **Discussions**: Use GitHub Discussions for questions
-- 🐛 **Bug Reports**: Open an issue with the bug template
-- 💡 **Feature Requests**: Open an issue with the feature template
-
----
-
-## ⭐ Show Your Support
-
-If you find this project helpful, please consider:
-
-- Giving it a ⭐️ on GitHub
-- Sharing it with others
-- Contributing to the codebase
-- Reporting bugs or suggesting features
+Need help? Open issues on GitHub or join discussions.
 
 ---
 
