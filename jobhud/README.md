@@ -1,16 +1,22 @@
-# jobhud
+# JobHUD Frontend
 
-A new Flutter project.
+JobHUD is the Flutter frontend for the career-guidance and job-search experience.
 
-## Getting Started
+## Run locally
 
-This project is a starting point for a Flutter application.
+1. cd jobhud
+2. flutter pub get
+3. flutter run -d chrome
 
-A few resources to get you started if this is your first Flutter project:
+## Build for GitHub Pages
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+flutter build web --release --base-href "/JobHud/"
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Deploy
+
+A GitHub Actions workflow is included in the repository root under .github/workflows/ to publish the web build to GitHub Pages automatically.
+
+## Notes
+
+- This app is the deployable frontend.
+- The backend service remains optional for API connectivity.

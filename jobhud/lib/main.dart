@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +17,8 @@ import 'screens/dashboard/dashboard_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+  setUrlStrategy(const HashUrlStrategy());
+
   // Load environment variables
   try {
     await dotenv.load(fileName: ".env");
